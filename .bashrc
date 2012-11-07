@@ -66,7 +66,7 @@ function git_modified_files {
         fi
 }
 
-function pgvim() { 
+function pgvim() {
     COMPREPLY=()
     local cur="${COMP_WORDS[COMP_CWORD]}"
     COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
@@ -115,6 +115,7 @@ alias la='ls -A'
 alias l='ls -CF'
 alias less='less -R'
 alias g='git'
+alias sub='sub .'
 alias phpunit='phpunit --colors'
 alias vagrant='/opt/vagrant/bin/vagrant'
 alias py='python'
