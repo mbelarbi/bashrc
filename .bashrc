@@ -70,7 +70,7 @@ function pgvim() {
     COMPREPLY=()
     local cur="${COMP_WORDS[COMP_CWORD]}"
     COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
-    cd ~/gitprojects/"$@" && gvim ;
+    cd ~/phpprojects/"$@" && gvim ;
 }
 
 complete -F "pgvim" -o "default" "pgvim"
@@ -114,7 +114,6 @@ alias ll='ls -alh'
 alias la='ls -A'
 alias l='ls -CF'
 alias less='less -R'
-alias sub='sub &'
 alias g='git'
 alias phpunit='phpunit --colors'
 alias vagrant='/opt/vagrant/bin/vagrant'
@@ -147,6 +146,9 @@ _pip_completion()
 complete -o default -F _pip_completion pip
 # pip bash completion end
 
+PATH=$PATH:$HOME/bin
+
 export WORKON_HOME=~/Envs
 source /usr/local/bin/virtualenvwrapper.sh
+source ~/.django_bash_completion.sh
 
