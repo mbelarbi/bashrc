@@ -44,7 +44,7 @@ if [[ -z $(git ls-files --other --exclude-standard 2> /dev/null) ]]
 then
 echo ""
 else
-echo "∙ "
+echo "[] "
 fi
 fi
 }
@@ -54,7 +54,7 @@ if [[ "git rev-parse --is-inside-work-tree &> /dev/null)" != 'true' ]] && git re
 then
 # Default: off - these are potentially expensive on big repositories
 git diff-index --cached --quiet --ignore-submodules HEAD 2> /dev/null
-(( $? && $? != 128 )) && echo "∙ "
+(( $? && $? != 128 )) && echo "๏ "
 fi
 }
 
@@ -62,7 +62,7 @@ function git_modified_files {
         if [[ "git rev-parse --is-inside-work-tree &> /dev/null)" != 'true' ]] && git rev-parse --quiet --verify HEAD &> /dev/null
         then
                 # Default: off - these are potentially expensive on big repositories
-                git diff --no-ext-diff --ignore-submodules --quiet --exit-code || echo "∙ "
+                git diff --no-ext-diff --ignore-submodules --quiet --exit-code || echo "༅ "
         fi
 }
 
@@ -146,9 +146,37 @@ _pip_completion()
 complete -o default -F _pip_completion pip
 # pip bash completion end
 
+# mac ssh/config hosts auto complete
+_complete_ssh_hosts ()
+{
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    comp_ssh_hosts=`cat ~/.ssh/known_hosts | \
+                    cut -f 1 -d ' ' | \
+                    sed -e s/,.*//g | \
+                    grep -v ^# | \
+                    uniq | \
+                    grep -v "\[" ;
+            cat ~/.ssh/config | \
+                    grep "^Host " | \
+                    awk '{print $2}'
+            `
+    COMPREPLY=( $(compgen -W "${comp_ssh_hosts}" -- $cur))
+    return 0
+}
+complete -F _complete_ssh_hosts ssh scp ssh-copy-id
+# mac ssh/config host auto complete end
+
+PATH=/usr/local/bin:/usr/local/share/python:$PATH
 PATH=$PATH:$HOME/bin
 
-export WORKON_HOME=~/Envs
-source /usr/local/bin/virtualenvwrapper.sh
+export WORKON_HOME=$HOME/Envs
+export VIRTUALENVWRAPPER_HOOK_DIR="$WORKON_HOME"
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
+export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/share/python/virtualenv
+source /usr/local/share/python/virtualenvwrapper.sh
+
+PATH=/Applications/Postgres.app/Contents/MacOS/bin:$PATH
+
 source ~/.django_bash_completion.sh
 
