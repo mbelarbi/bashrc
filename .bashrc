@@ -127,10 +127,6 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
-export WORKON_HOME=/home/belarbim/.virtualenvs
-alias workoff='deactivate'
-#source /usr/local/bin/virtualenvwrapper.sh
 #. /etc/bash_completion.d/django_bash_completion
 export PYTHONSTARTUP=~/.pythonrc
 export PYTHONSTARTUP=~/.pystartup
@@ -168,6 +164,8 @@ complete -F _complete_ssh_hosts ssh scp ssh-copy-id
 # mac ssh/config host auto complete end
 
 PATH=/usr/local/bin:/usr/local/share/python:$PATH
+PATH=/usr/local/php5/bin:$PATH
+PATH=$PATH:/usr/local/sbin
 PATH=$PATH:$HOME/bin
 
 export WORKON_HOME=$HOME/Envs
