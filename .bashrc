@@ -172,7 +172,7 @@ export WORKON_HOME=$HOME/Envs
 export VIRTUALENVWRAPPER_HOOK_DIR="$WORKON_HOME"
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
 export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/share/python/virtualenv
-source /usr/local/share/python/virtualenvwrapper.sh
+source /usr/local/bin/virtualenvwrapper.sh
 
 PATH=/Applications/Postgres.app/Contents/MacOS/bin:$PATH
 
