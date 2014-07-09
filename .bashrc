@@ -127,6 +127,10 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
+if [ -f ~/.bashrc/.git-completion.bash ]; then
+    . ~/.bashrc/.git-completion.bash
+fi
+
 #. /etc/bash_completion.d/django_bash_completion
 export PYTHONSTARTUP=~/.pythonrc
 export PYTHONSTARTUP=~/.pystartup
@@ -170,8 +174,8 @@ PATH=$PATH:$HOME/bin
 
 export WORKON_HOME=$HOME/Envs
 export VIRTUALENVWRAPPER_HOOK_DIR="$WORKON_HOME"
-export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
-export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/share/python/virtualenv
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
+export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
 source /usr/local/bin/virtualenvwrapper.sh
 
 PATH=/Applications/Postgres.app/Contents/MacOS/bin:$PATH
