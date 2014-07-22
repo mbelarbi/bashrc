@@ -118,6 +118,7 @@ alias g='git'
 alias phpunit='phpunit --colors'
 alias vagrant='/opt/vagrant/bin/vagrant'
 alias py='python'
+alias uctag="ctags -R --exclude='.git' ."
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
