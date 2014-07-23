@@ -134,7 +134,6 @@ fi
 
 #. /etc/bash_completion.d/django_bash_completion
 export PYTHONSTARTUP=~/.pythonrc
-export PYTHONSTARTUP=~/.pystartup
 export DJANGO_COLORS="light"
 
 # pip bash completion start
