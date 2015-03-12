@@ -116,7 +116,6 @@ alias l='ls -CF'
 alias less='less -R'
 alias g='git'
 alias phpunit='phpunit --colors'
-alias vagrant='/opt/vagrant/bin/vagrant'
 alias py='python'
 alias uctag="ctags -R --exclude='.git' ."
 
