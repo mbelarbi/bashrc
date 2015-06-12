@@ -127,8 +127,8 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-if [ -f ~/.bashrc/.git-completion.bash ]; then
-    . ~/.bashrc/.git-completion.bash
+if [ -f ~/bashrc/.git-completion.bash ]; then
+    source ~/bashrc/.git-completion.bash
 fi
 
 #. /etc/bash_completion.d/django_bash_completion
