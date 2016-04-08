@@ -89,7 +89,7 @@ BOLD_RED="01;31m"
 BOLD_GREEN="01;32m"
 BOLD_BLUE="01;34m"
 
-PS1='\[\033[$TIME_COLOUR\]$(date +%H:%M)\[\033[00m\] ${debian_chroot:+($debian_chroot)}\[\033[$COLOUR\]\u@\h\[\033[00m\]:\[\033[01;$PATH_COLOUR\]\w\[\033[00m\]\[\033[01;35m\] $(parse_git_branch)\[\033[00m\]\[\033[$BOLD_RED\]$(git_unadded_new)\[\033[00m\]\[\033[$BOLD_GREEN\]$(git_needs_commit)\[\033[00m\]\[\033[$BOLD_BLUE\]$(git_modified_files)\[\033[00m\]\n$ '
+PS1='\[\033[$TIME_COLOUR\]$(date +%H:%M)\[\033[00m\] ${debian_chroot:+($debian_chroot)}\[\033[$COLOUR\]\u@\h\[\033[00m\]: \[\033[01;$PATH_COLOUR\]\w\[\033[00m\]\[\033[01;35m\] $(parse_git_branch)\[\033[00m\]\[\033[$BOLD_RED\]$(git_unadded_new)\[\033[00m\]\[\033[$BOLD_GREEN\]$(git_needs_commit)\[\033[00m\]\[\033[$BOLD_BLUE\]$(git_modified_files)\[\033[00m\]\n$ '
 
 unset color_prompt force_color_prompt
 
@@ -110,7 +110,7 @@ test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors
     alias egrep='egrep --color=always'
 fi
 
-alias ll='ls -alh'
+alias ll='ls -alhF'
 alias la='ls -A'
 alias l='ls -CF'
 alias less='less -R'
@@ -118,6 +118,7 @@ alias g='git'
 alias phpunit='phpunit --colors'
 alias py='python'
 alias uctag="ctags -R --exclude='.git' ."
+alias mvim='gvim'
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
@@ -145,26 +146,18 @@ _pip_completion()
 complete -o default -F _pip_completion pip
 # pip bash completion end
 
-# mac ssh/config hosts auto complete
-_complete_ssh_hosts ()
+_ssh() 
 {
+    local cur prev opts
     COMPREPLY=()
     cur="${COMP_WORDS[COMP_CWORD]}"
-    comp_ssh_hosts=`cat ~/.ssh/known_hosts | \
-                    cut -f 1 -d ' ' | \
-                    sed -e s/,.*//g | \
-                    grep -v ^# | \
-                    uniq | \
-                    grep -v "\[" ;
-            cat ~/.ssh/config | \
-                    grep "^Host " | \
-                    awk '{print $2}'
-            `
-    COMPREPLY=( $(compgen -W "${comp_ssh_hosts}" -- $cur))
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+    opts=$(grep '^Host' ~/.ssh/config | grep -v '[?*]' | cut -d ' ' -f 2-)
+
+    COMPREPLY=( $(compgen -W "$opts" -- ${cur}) )
     return 0
 }
-complete -F _complete_ssh_hosts ssh scp ssh-copy-id
-# mac ssh/config host auto complete end
+complete -F _ssh ssh
 
 PATH=/usr/local/bin:/usr/local/share/python:$PATH
 PATH=/usr/local/php5/bin:$PATH
@@ -175,9 +168,15 @@ export WORKON_HOME=$HOME/Envs
 export VIRTUALENVWRAPPER_HOOK_DIR="$WORKON_HOME"
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
 export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
+export JAVA_HOME=/usr/lib/jvm/java-8-oracle
+export LD_LIBRARY_PATH=/usr/lib/oracle/12.1/client64/lib:$LD_LIBRARY_PATH
+export PATH=/usr/lib/oracle/12.1/client64/bin:$PATH
+export ORACLE_HOME=/usr/lib/oracle/12.1/client64/
+export DYLD_LIBRARY_PATH=$ORACLE_HOME
+export OCI_LIB=/usr/lib/oracle/12.1/client64/lib
 source /usr/local/bin/virtualenvwrapper.sh
 
-PATH=/Applications/Postgres.app/Contents/MacOS/bin:$PATH
+#PATH=/Applications/Postgres.app/Contents/MacOS/bin:$PATH
 
 source ~/.django_bash_completion.sh
 
