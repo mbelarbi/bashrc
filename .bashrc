@@ -66,15 +66,6 @@ function git_modified_files {
         fi
 }
 
-function pgvim() {
-    COMPREPLY=()
-    local cur="${COMP_WORDS[COMP_CWORD]}"
-    COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
-    cd ~/phpprojects/"$@" && gvim ;
-}
-
-complete -F "pgvim" -o "default" "pgvim"
-
 if [ `id -u` = 0 ]; then
 COLOUR="04;01;31m"
 PATH_COLOUR="04;01;31m"
@@ -118,7 +109,6 @@ alias g='git'
 alias phpunit='phpunit --colors'
 alias py='python'
 alias uctag="ctags -R --exclude='.git' ."
-alias mvim='gvim'
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
@@ -159,7 +149,7 @@ _ssh()
 }
 complete -F _ssh ssh
 
-PATH=/usr/local/bin:/usr/local/share/python:$PATH
+PATH=/usr/local/bin:$PATH
 PATH=/usr/local/php5/bin:$PATH
 PATH=$PATH:/usr/local/sbin
 PATH=$PATH:$HOME/bin
