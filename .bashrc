@@ -109,6 +109,8 @@ alias g='git'
 alias phpunit='phpunit --colors'
 alias py='python'
 alias uctag="ctags -R --exclude='.git' ."
+alias pg_start="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
+alias pg_stop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
