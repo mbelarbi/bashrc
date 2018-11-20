@@ -124,6 +124,12 @@ if [ -f ~/bashrc/.git-completion.bash ]; then
     source ~/bashrc/.git-completion.bash
 fi
 
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/miloud.belarbi/google-cloud-sdk/path.bash.inc' ]; then . '/Users/miloud.belarbi/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/miloud.belarbi/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/miloud.belarbi/google-cloud-sdk/completion.bash.inc'; fi
+
 #. /etc/bash_completion.d/django_bash_completion
 export PYTHONSTARTUP=~/.pythonrc
 export DJANGO_COLORS="light"
