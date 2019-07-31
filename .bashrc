@@ -111,6 +111,7 @@ alias py='python'
 alias uctag="ctags -R --exclude='.git' ."
 alias pg_start="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
 alias pg_stop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
+alias mkvirtualenv='mkvirtualenv --no-site-packages'
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
@@ -164,7 +165,7 @@ PATH=$PATH:$HOME/bin
 
 export WORKON_HOME=$HOME/Envs
 export VIRTUALENVWRAPPER_HOOK_DIR="$WORKON_HOME"
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
 export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
 export JAVA_HOME=/usr/lib/jvm/java-8-oracle
 export LD_LIBRARY_PATH=/usr/lib/oracle/12.1/client64/lib:$LD_LIBRARY_PATH
