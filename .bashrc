@@ -111,7 +111,8 @@ alias py='python'
 alias uctag="ctags -R --exclude='.git' ."
 alias pg_start="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
 alias pg_stop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
-alias mkvirtualenv='mkvirtualenv --no-site-packages'
+alias clock='while sleep 1;do tput sc;tput cup 0 $(($(tput cols)-29));date;tput rc;done &'
+alias hash='openssl rand -base64'
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
@@ -124,12 +125,6 @@ fi
 if [ -f ~/bashrc/.git-completion.bash ]; then
     source ~/bashrc/.git-completion.bash
 fi
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/miloud.belarbi/google-cloud-sdk/path.bash.inc' ]; then . '/Users/miloud.belarbi/google-cloud-sdk/path.bash.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/miloud.belarbi/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/miloud.belarbi/google-cloud-sdk/completion.bash.inc'; fi
 
 #. /etc/bash_completion.d/django_bash_completion
 export PYTHONSTARTUP=~/.pythonrc
@@ -158,10 +153,12 @@ _ssh()
 }
 complete -F _ssh ssh
 
+PATH=/usr/local/Cellar:$PATH
 PATH=/usr/local/bin:$PATH
 PATH=/usr/local/php5/bin:$PATH
 PATH=$PATH:/usr/local/sbin
 PATH=$PATH:$HOME/bin
+PATH=/usr/local/opt/mysql-client/bin:$PATH
 
 export WORKON_HOME=$HOME/Envs
 export VIRTUALENVWRAPPER_HOOK_DIR="$WORKON_HOME"
@@ -173,9 +170,16 @@ export PATH=/usr/lib/oracle/12.1/client64/bin:$PATH
 export ORACLE_HOME=/usr/lib/oracle/12.1/client64/
 export DYLD_LIBRARY_PATH=$ORACLE_HOME
 export OCI_LIB=/usr/lib/oracle/12.1/client64/lib
+export BASH_SILENCE_DEPRECATION_WARNING=1
 source /usr/local/bin/virtualenvwrapper.sh
 
 #PATH=/Applications/Postgres.app/Contents/MacOS/bin:$PATH
 
 source ~/.django_bash_completion.sh
 
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/miloud.belarbi/google-cloud-sdk/path.bash.inc' ]; then . '/Users/miloud.belarbi/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/miloud.belarbi/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/miloud.belarbi/google-cloud-sdk/completion.bash.inc'; fi
